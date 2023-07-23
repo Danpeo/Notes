@@ -1,0 +1,75 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    int maxTitleTextLength = 30;
+    int maxBodyTextLength = 40;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["ApplicationName"]</h1>
+    <p>Keep your notes safely</p>
+</div>
+<div class="button-main btn-main-horizontal d-flex">
+    <a asp-page="/Note/Create" class="link-light">
+        <button class="btn btn-success">
+            Add New
+        </button>
+    </a>
+    <form method="get" asp-page="/Note/Index" class="form-inline ml-2" style="margin-left: 10px;">
+        <div class="input-group">
+            <input type="text" name="searchQuery" class="form-control" placeholder="Enter search query"/>
+            <input type="date" name="searchDate" class="form-control"/>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-success element-horizontal">Search</button>
+                <button type="button" class="btn btn-secondary" id="resetButton">Reset</button>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        @foreach (var note in Model.Notes)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <!-- Flex container for delete button and card title -->
+                        <div class="delete-btn-container">
+                            <a asp-page="/Note/Delete" asp-route-id="@note?.Id" class="link-main delete-btn">
+                                <i class="fas fa-times-circle"></i>
+                            </a>
+                        </div>
+                        <h5 class="card-title text-center">
+                            <a asp-page="/Note/Detail" asp-route-id="@note?.Id" class="link-main">
+                                <truncate text=@note?.Title length=maxTitleTextLength></truncate>
+                            </a>
+                        </h5>
+                        <p class="card-text text-center">
+                            <a asp-page="/Note/Detail" asp-route-id="@note?.Id" class="link-secondary">
+                                <truncate text=@note?.TextBody length=maxBodyTextLength>@note?.TextBody</truncate>
+                            </a>
+                        </p>
+                        <p class="card-text text-center">
+                            <a asp-page="/Note/Detail" asp-route-id="@note?.Id" class="link-secondary">
+                                @note?.CreationDate
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            SelectorReset.attachResetHandler("resetButton", [
+                { selector: "input[name='searchQuery']" },
+                { selector: "input[name='searchDate']" },
+            ]);
+        });
+
+</script>

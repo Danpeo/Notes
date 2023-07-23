@@ -1,0 +1,32 @@
+@page "{id:int}"
+@model Notes.Pages.Note.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Note";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Are you sure you want to delete this note?</h1>
+            <div class="note-container">
+                <h1 class="note-title">@Model.Note?.Title</h1>
+                <p class="note-creation-date">@Model.Note?.CreationDate</p>
+                <p class="note-body">@Model.Note?.TextBody</p>
+            </div>
+            <div class="button-main btn-main-horizontal d-flex">
+                <form method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="@Model.Note.Id"/>
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
+                <a asp-page="/Note/Detail" asp-route-id="@Model.Note?.Id" class="link-light btn-main-horizontal">
+                    <button class="btn btn-primary">
+                        Cancel
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

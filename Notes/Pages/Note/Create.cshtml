@@ -1,0 +1,25 @@
+@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Create Note";
+}
+
+<h1>Add New Note</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Note.Title" class="form-label">Title</label>
+        <input asp-for="Note.Title" class="form-control">
+        <span asp-validation-for="Note.Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Note.TextBody" class="form-label">Description</label>
+        <textarea asp-for="Note.TextBody" class="form-control"></textarea>
+        <span asp-validation-for="Note.TextBody" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

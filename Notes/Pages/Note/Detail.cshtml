@@ -1,0 +1,30 @@
+@page "{id:int}"
+@model Notes.Pages.Note.DetailModel
+
+@{
+    ViewData["Title"] = @Model.Note?.Title;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="note-container">
+                <h1 class="note-title">@Model.Note?.Title</h1>
+                <p class="note-creation-date">@Model.Note?.CreationDate</p>
+                <p class="note-body">@Model.Note?.TextBody</p>
+            </div>
+            <div class="button-main">
+                <a asp-page="/Note/Edit" asp-route-id="@Model.Note?.Id" class="link-light">
+                    <button class="btn btn-primary">
+                        Edit
+                    </button>
+                </a>
+                <a asp-page="/Note/Delete" asp-route-id="@Model.Note?.Id" class="link-light">
+                    <button class="btn btn-danger">
+                        Delete
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
