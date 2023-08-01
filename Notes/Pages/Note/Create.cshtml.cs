@@ -9,15 +9,13 @@ namespace Notes.Pages.Note;
 
 public class CreateModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
     private readonly INoteService _noteService;
 
     [BindProperty] public Models.Note? Note { get; set; } = new();
 
-    public CreateModel(ApplicationDbContext context)
+    public CreateModel(ApplicationDbContext context, INoteService noteService)
     {
-        _context = context;
-        _noteService = new NoteService(_context);
+        _noteService = noteService;
     }
     
     public void OnGet()

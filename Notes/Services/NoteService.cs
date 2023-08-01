@@ -79,7 +79,7 @@ public class NoteService : INoteService
         return false;
     }
 
-    public async Task<bool> SaveAsync()
+    private async Task<bool> SaveAsync()
     {
         var saved = await _context.SaveChangesAsync();
         return saved > 0;
